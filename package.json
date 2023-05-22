@@ -1,5 +1,5 @@
 {
-  "name": "@maxwellolliver/gh-pages",
+  "name": "gh-pages-cli",
   "version": "1.0.0",
   "description": "Simple CLI to deploy projects to Github Pages",
   "main": "cli.js",
