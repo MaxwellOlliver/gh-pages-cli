@@ -1,0 +1,22 @@
+{
+  "name": "@maxwellolliver/gh-pages",
+  "version": "1.0.0",
+  "description": "Simple CLI to deploy projects to Github Pages",
+  "main": "cli.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "github-pages",
+    "deploy"
+  ],
+  "author": "Maxwell Olliver",
+  "license": "MIT",
+  "bin": {
+    "gh-pages": "./cli.js"
+  },
+  "dependencies": {
+    "child_process": "^1.0.2",
+    "commander": "^10.0.1"
+  }
+}
