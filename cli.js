@@ -7,7 +7,7 @@ program.version("1.0.0");
 
 program
   .command("setup <branchName>")
-  .description("Setup your project to deploy")
+  .description("Set your project up to deploy")
   .action(commands.setup);
 
 program
