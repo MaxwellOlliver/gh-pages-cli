@@ -2,6 +2,10 @@ const { exec } = require("child_process");
 
 module.exports = {
   setup: (branchName) => {
+    console.log(
+      "\x1b[34m%s\x1b[0m",
+      `Creating orphan branch named "${branchName}"`
+    );
     exec(`git checkout --orphan ${branchName}`, (error) => {
       if (error) {
         console.log(
@@ -10,16 +14,18 @@ module.exports = {
         );
         return;
       }
-    });
-    exec(`git reset --hard`);
-    exec(`git commit --allow-empty -m "deploy: init"`);
-    exec(`git checkout main`, (error) => {
-      if (error) {
-        console.log(
-          "\x1b[33m%s\x1b[0m",
-          `Cannot checkout to main branch. Please, check if "main" exists.\n\n${error.message}`
-        );
-      }
+      exec(`git reset --hard`);
+      exec(`git commit --allow-empty -m "deploy: init"`);
+      exec(`git checkout main`, (error) => {
+        if (error) {
+          console.log(
+            "\x1b[33m%s\x1b[0m",
+            `Cannot checkout to main branch. Please, check if "main" exists.\n\n${error.message}`
+          );
+        } else {
+          console.log("\x1b[32m%s\x1b[0m", `Done!`);
+        }
+      });
     });
   },
   deploy: (branchName, directory) => {
@@ -60,7 +66,10 @@ module.exports = {
             } else {
               exec(
                 `cd ${directory} && git add --all && git commit -m "deploy: upload updates" && git push origin ${branchName}`,
-                (_, stdout) => {
+                (error, stdout) => {
+                  if (error) {
+                    console.log(error);
+                  }
                   console.log(stdout);
                 }
               );
